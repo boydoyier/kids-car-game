@@ -421,7 +421,7 @@ let highScore=parseInt(localStorage.getItem('carHighScore')||'0');
 const effects={boost:0,oil:0,invincible:0};
 let oilDrift=0;
 let items=[], popups=[];
-let steerAngle=0;
+let steerAngle=0, lateralVel=0;
 let confetti=[], confettiSpawned=false;
 let lastHitFlash=0;
 let spawnTimer=0;
@@ -436,7 +436,7 @@ function beginRun() {
   player={x:ROAD_CX,y:0,angle:0,speed:180,maxSpeed:def.maxSpeed,accel:def.accel,turnRate:def.turnRate,colorIdx:selectedCar};
   score=0; collectScore=0; lives=3; distance=0;
   effects.boost=0; effects.oil=0; effects.invincible=0; oilDrift=0;
-  popups=[]; steerAngle=0; confettiSpawned=false; confetti=[];
+  popups=[]; steerAngle=0; lateralVel=0; confettiSpawned=false; confetti=[];
   items=[]; spawnTimer=0; baseSpeed=180; speedLevel=0; speedLevelFlash=0;
   countdownVal=3; countdownTimer=0;
   state='countdown';
@@ -455,10 +455,12 @@ function updatePlayer(dt) {
   player.speed=baseSpeed*(effects.boost>0?1.5:1.0);
   speedLevelFlash=Math.max(0,speedLevelFlash-dt);
 
-  const lateralMult=effects.oil>0?0.55:1.0;
-  if (left)  player.x-=LATERAL_SPEED*lateralMult*dt;
-  if (right) player.x+=LATERAL_SPEED*lateralMult*dt;
-  if (effects.oil>0) player.x+=oilDrift*LATERAL_SPEED*0.45*dt;
+  const oilMult = effects.oil>0 ? 0.55 : 1.0;
+  const latTarget = (left ? -LATERAL_SPEED : right ? LATERAL_SPEED : 0) * oilMult;
+  const lerpRate  = (left||right) ? 12 : 8;   // snappy start, gentle coast to stop
+  lateralVel += (latTarget - lateralVel) * Math.min(dt * lerpRate, 1);
+  player.x += lateralVel * dt;
+  if (effects.oil>0) player.x += oilDrift * LATERAL_SPEED * 0.45 * dt;
 
   player.x=Math.max(ROAD_LEFT+16, Math.min(ROAD_RIGHT-16, player.x));
 
