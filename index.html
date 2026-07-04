@@ -450,7 +450,7 @@ function updatePlayer(dt) {
   // Speed level: +12% max speed every 2500m, obstacles spawn faster too
   const newLevel=Math.floor(distance/20000);
   if (newLevel>speedLevel){ speedLevel=newLevel; speedLevelFlash=2.8; }
-  const effectiveMax=player.maxSpeed*(1+speedLevel*0.12);
+  const effectiveMax=player.maxSpeed*(1+speedLevel*0.18);
   baseSpeed   =Math.min(baseSpeed+14*dt, effectiveMax);
   player.speed=baseSpeed*(effects.boost>0?1.5:1.0);
   speedLevelFlash=Math.max(0,speedLevelFlash-dt);
