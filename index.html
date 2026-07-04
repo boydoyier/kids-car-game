@@ -609,10 +609,11 @@ function drawHUD() {
 
   const spd=Math.round(Math.abs(player.speed)), frac=spd/player.maxSpeed;
   const barClr=frac<0.6?'#00e676':frac<0.85?'#ffdd00':'#ff4444';
-  ctx.fillStyle='rgba(0,0,0,0.52)'; rrect(W-136,H-58,124,46,10); ctx.fill();
-  ctx.fillStyle='rgba(255,255,255,0.08)'; rrect(W-128,H-48,108,13,4); ctx.fill();
-  ctx.fillStyle=barClr; rrect(W-128,H-48,Math.round(108*frac),13,4); ctx.fill();
-  ctx.fillStyle='#fff'; ctx.font='bold 20px Arial'; ctx.textAlign='right'; ctx.fillText(spd+' km/h',W-18,H-18);
+  ctx.fillStyle='rgba(0,0,0,0.52)'; rrect(12,146,150,48,10); ctx.fill();
+  ctx.fillStyle='#aaa'; ctx.font='bold 11px Arial'; ctx.textAlign='left'; ctx.fillText('SPEED',22,160);
+  ctx.fillStyle='rgba(255,255,255,0.10)'; rrect(22,163,128,8,3); ctx.fill();
+  ctx.fillStyle=barClr; rrect(22,163,Math.round(128*frac),8,3); ctx.fill();
+  ctx.fillStyle='#fff'; ctx.font='bold 20px Arial'; ctx.fillText(spd+' km/h',22,186);
 
   if (effects.boost>0) {
     ctx.fillStyle='rgba(255,200,0,0.92)'; ctx.font='bold 16px Arial'; ctx.textAlign='center';
