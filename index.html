@@ -369,7 +369,7 @@ const vBtn={left:false,right:false};
 const activePtrs=new Map();
 
 function hitTouchButton(mx,my) {
-  const defs=[{x:80,y:H-72,r:56,k:'left'},{x:W-80,y:H-72,r:56,k:'right'}];
+  const defs=[{x:82,y:H-82,r:72,k:'left'},{x:W-82,y:H-82,r:72,k:'right'}];
   for (const b of defs) if ((mx-b.x)**2+(my-b.y)**2<b.r**2) return b.k;
   return null;
 }
@@ -647,14 +647,14 @@ function drawHUD() {
 
 // ── Touch buttons ─────────────────────────────────────────────
 function drawTouchButtons() {
-  const defs=[{x:80,y:H-72,label:'◄',active:vBtn.left},{x:W-80,y:H-72,label:'►',active:vBtn.right}];
+  const defs=[{x:82,y:H-82,label:'◄',active:vBtn.left},{x:W-82,y:H-82,label:'►',active:vBtn.right}];
   for (const b of defs) {
     ctx.save();
     ctx.fillStyle=b.active?'rgba(255,255,255,0.44)':'rgba(0,0,0,0.38)';
-    ctx.beginPath(); ctx.arc(b.x,b.y,54,0,Math.PI*2); ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=2.5; ctx.stroke();
+    ctx.beginPath(); ctx.arc(b.x,b.y,70,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.5)'; ctx.lineWidth=3; ctx.stroke();
     ctx.fillStyle=b.active?'#000':'rgba(255,255,255,0.8)';
-    ctx.font='bold 30px Arial'; ctx.textAlign='center'; ctx.fillText(b.label,b.x,b.y+11);
+    ctx.font='bold 38px Arial'; ctx.textAlign='center'; ctx.fillText(b.label,b.x,b.y+14);
     ctx.restore();
   }
 }
