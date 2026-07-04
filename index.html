@@ -27,6 +27,10 @@ const ctx    = canvas.getContext('2d');
 const DPR    = Math.min(window.devicePixelRatio||1, 2);
 const BASE_W = 800;
 let W = BASE_W, H = 600, scale = 1;
+const CAMERA_H = 68;
+let HORIZON_Y = Math.round(H*0.40);
+let FOCAL     = Math.round(H*0.55);
+let GROUND_H  = H - HORIZON_Y;
 
 function resize() {
   scale = window.innerWidth / BASE_W;      // always fill full screen width
@@ -100,10 +104,7 @@ function buildRoadTexture() {
 const ROAD_TEX = buildRoadTexture();
 
 // ── Mode 7 constants ──────────────────────────────────────────
-let HORIZON_Y = Math.round(H*0.40);
-const CAMERA_H  = 68;
-let FOCAL     = Math.round(H*0.55);
-let GROUND_H  = H - HORIZON_Y;
+// (HORIZON_Y, CAMERA_H, FOCAL, GROUND_H declared near top and updated in resize)
 
 // ── Mode 7 scanline renderer ──────────────────────────────────
 function drawMode7() {
