@@ -493,7 +493,7 @@ function updateItems(dt) {
   const interval=Math.max(1.8-distance/7000, 0.55);
   spawnTimer+=dt;
   if (spawnTimer>=interval){spawnTimer=0;spawnWave();}
-  items=items.filter(it=>it.y>player.y-180);
+  items=items.filter(it=>it.y<player.y+150);
 }
 
 function checkItemCollisions() {
