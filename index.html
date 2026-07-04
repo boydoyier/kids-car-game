@@ -624,9 +624,9 @@ function drawHUD() {
   if (speedLevelFlash>0) {
     const fade=Math.min(speedLevelFlash,1);
     ctx.strokeStyle=`rgba(255,220,0,${fade*0.7})`; ctx.lineWidth=8; ctx.strokeRect(4,4,W-8,H-8);
-    ctx.textAlign='center'; ctx.font='bold 22px Arial';
-    ctx.fillStyle=`rgba(0,0,0,${fade*0.5})`; ctx.fillText('FASTER!  Level '+speedLevel,W/2+2,56);
-    ctx.fillStyle=`rgba(255,220,0,${fade})`; ctx.fillText('FASTER!  Level '+speedLevel,W/2,54);
+    ctx.textAlign='right'; ctx.font='bold 22px Arial';
+    ctx.fillStyle=`rgba(0,0,0,${fade*0.5})`; ctx.fillText('FASTER!  Level '+speedLevel,W-14,56);
+    ctx.fillStyle=`rgba(255,220,0,${fade})`; ctx.fillText('FASTER!  Level '+speedLevel,W-16,54);
   }
 
   if (lastHitFlash>0) {
